@@ -7,21 +7,20 @@
 
   outputs = { self, nixpkgs }:
     let
-      system = "x86_64-linux";
-      pname = "lychee-slicer";
-      version = "7.1.2";
-      src = builtins.fetchurl {
-        url = "https://mango-lychee.nyc3.cdn.digitaloceanspaces.com/LycheeSlicer-${version}.AppImage";
-	sha256 = "sha256:1dg2hp1jp75widc1a0mrv2lbcr4mx2fyljx2n2nbb35kygblq6py";
-      };
-      pkgs = import nixpkgs {
-        inherit system;
-      };
+      systems = [ "x86_64-linux" ];
+      forEachSystem = nixpkgs.lib.genAttrs systems;
+      overlayList = [ self.overlays.default ];
+      pkgsBySystem = forEachSystem ( system:
+        import nixpkgs {
+           inherit system;
+           overlays = overlayList;
+        }
+      );
     in {
-      packages.x86_64-linux.lychee-slicer = pkgs.appimageTools.wrapType2 {
-        inherit pname version src;
-      };
-
-      packages.x86_64-linux.default = self.packages.x86_64-linux.lychee-slicer;
+      overlays.default = final: prev: { lychee-slicer = final.callPackage ./package.nix { }; };
+      packages = forEachSystem ( system: {
+        lychee-slicer = pkgsBySystem.${system}.lychee-slicer;
+        default = pkgsBySystem.${system}.lychee-slicer;
+      });
     };
 }
