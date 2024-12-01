@@ -4,7 +4,7 @@
   appimageTools
 }:
 let
-  pname = "lychee-slicer";
+  pname = "lycheeslicer";
   version = "7.1.2";
 in
 appimageTools.wrapType2 {
@@ -16,6 +16,6 @@ appimageTools.wrapType2 {
   meta = with lib; {
     description = "Lychee 3D Slicer Software";
     homepage = "https://mango3d.io/";
-    mainProgramm = "lychee-slicer";
+    mainProgramm = "lycheeslicer";
   };
 }
