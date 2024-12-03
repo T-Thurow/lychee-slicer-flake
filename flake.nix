@@ -17,10 +17,10 @@
         }
       );
     in {
-      overlays.default = final: prev: { lycheeslicer = final.callPackage ./package.nix { }; };
+      overlays.default = final: prev: { lychee-slicer = final.callPackage ./package.nix { }; };
       packages = forEachSystem ( system: {
-        lycheeslicer = pkgsBySystem.${system}.lycheeslicer;
-        default = pkgsBySystem.${system}.lycheeslicer;
+        lychee-slicer = pkgsBySystem.${system}.lychee-slicer;
+        default = pkgsBySystem.${system}.lychee-slicer;
       });
     };
 }
