@@ -5,10 +5,10 @@
 }:
 let
   pname = "lycheeslicer";
-  version = "7.2.0";
+  version = "7.2.1-beta";
   src = fetchurl {
     url = "https://mango-lychee.nyc3.cdn.digitaloceanspaces.com/LycheeSlicer-${version}.AppImage";
-    sha256 = "sha256:6463531161ab9abcc79858a30da022ceec5f8475bb93e45ea13ac6e261847288";
+    sha256 = "sha256:0aa24f9491906f8c2f853bb18c5c6c334667a090238f4f976126f2f04c975ab3";
   };
   appimageContents = appimageTools.extract {
     inherit pname version src;
