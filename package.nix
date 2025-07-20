@@ -24,6 +24,10 @@ appimageTools.wrapType2 {
     cp -r ${appimageContents}/usr/share/icons $out/share
   '';
 
+  extraPkgs = pkgs: with pkgs; [
+    pkgs.xorg.libxshmfence
+  ];
+
   meta = with lib; {
     description = "Lychee 3D Slicer Software";
     homepage = "https://mango3d.io/";
